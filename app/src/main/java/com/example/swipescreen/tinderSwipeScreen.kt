@@ -16,9 +16,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.textInputServiceFactory
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.compose.ui.unit.dp
@@ -47,11 +49,49 @@ fun tinderSwipeScreen() {
                 worksAt = "McDonalds",
                 painter = painterResource(id = R.drawable.kermit2)
             )
-
+            LeftRightButtonsRow()
         }
     }
 }
 
+@Composable
+fun LeftRightButtonsRow() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                imageVector = ImageVector.vectorResource(id = R.drawable.left_svg),
+                contentDescription = "lefty",
+                tint = Color(0xFF03588c),
+                modifier = Modifier.size(150.dp)
+            )
+            Text(text = "Lefty"
+                , style = TextStyle(color = Color(0xFF03588c), fontSize = 30.sp, fontWeight = FontWeight.Bold),
+                // move the text a little bit to the right
+                modifier = Modifier.padding(start = 30.dp)
+            )
+        }
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                imageVector = ImageVector.vectorResource(id = R.drawable.righty_svg),
+                contentDescription = "Righty",
+                tint = Color(0xFFa60321),
+                modifier = Modifier.size(150.dp)
+            )
+                Text(
+                    text = "Righty",
+                    style = TextStyle(color = Color(0xFFa60321), fontSize = 30.sp, fontWeight = FontWeight.Bold),
+                    modifier = Modifier.offset(x = -(25).dp)
+                )
+        }
+
+    }
+}
 
 
 @Composable
@@ -103,7 +143,7 @@ fun ImageCard(
                         text = fullName,
                         style = TextStyle(color = Color.White, fontSize = 26.sp),
 
-                    )
+                        )
                     Text(text = worksAt, style = TextStyle(color = Color.White, fontSize = 16.sp))
                 }
 
@@ -124,6 +164,7 @@ fun PoliticalAppIconTop(modifier: Modifier = Modifier) {
         Icon(
             imageVector = ImageVector.vectorResource(id = R.drawable.asset_1),
             contentDescription = "Political App Icon",
+            tint = Color.Black,
             modifier = Modifier.size(100.dp)
         )
 //        Image(
