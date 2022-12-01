@@ -1,41 +1,116 @@
 package com.example.swipescreen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.swipescreen.ui.theme.SwipeScreenTheme
+
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    SwipeScreenTheme {
+        tinderSwipeScreen()
+    }
+}
+
 
 @Composable
 fun tinderSwipeScreen() {
     // A surface container using the 'background' color from the theme
     Surface(color = MaterialTheme.colors.background) {
+        TopBar()
         Column() {
-            TopBar()
             PoliticalAppIconTop()
-            HeroCard()
+            HeroCard(
+                fullName = "Kermit Cohen",
+                worksAt = "McDonalds",
+                painter = painterResource(id = R.drawable.kermit2)
+            )
+
         }
-
-
     }
 }
 
+
+
 @Composable
-fun HeroCard(modifier: Modifier = Modifier) {
-    Card() {
-        
+fun HeroCard(modifier: Modifier = Modifier, fullName: String, worksAt: String, painter: Painter) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        ImageCard(painter = painter, fullName = fullName, worksAt = worksAt)
     }
+}
+
+
+@Composable
+fun ImageCard(
+    painter: Painter, worksAt: String, fullName: String, modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth(0.98f)
+            .fillMaxHeight(0.8f),
+        shape = RoundedCornerShape(15.dp),
+        elevation = 5.dp
+    ) {
+        Box() {
+            Image(
+                painter = painter,
+                contentDescription = "$fullName $worksAt",
+                contentScale = ContentScale.Crop,
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(Color.Transparent, Color.Black), startY = 300f
+                        )
+                    )
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(12.dp),
+                contentAlignment = Alignment.BottomStart
+            ) {
+                Column() {
+                    Text(
+                        text = fullName,
+                        style = TextStyle(color = Color.White, fontSize = 26.sp),
+
+                    )
+                    Text(text = worksAt, style = TextStyle(color = Color.White, fontSize = 16.sp))
+                }
+
+            }
+        }
+    }
+
 }
 
 
@@ -44,15 +119,19 @@ fun PoliticalAppIconTop(modifier: Modifier = Modifier) {
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.political_icon_image), contentDescription = "Political App Icon",
-            modifier = Modifier
-                .padding(16.dp)
-                .size(100.dp)
+        Icon(
+            imageVector = ImageVector.vectorResource(id = R.drawable.asset_1),
+            contentDescription = "Political App Icon",
+            modifier = Modifier.size(100.dp)
         )
-        // i tried to add the icon as vector but it didn't work
+//        Image(
+//            painter = painterResource(id = R.drawable.political_icon_image),
+//            contentDescription = "Political App Icon",
+//            modifier = Modifier
+//                .size(100.dp)
+//        )
     }
 }
 
