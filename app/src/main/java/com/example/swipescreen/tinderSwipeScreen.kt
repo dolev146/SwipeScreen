@@ -45,7 +45,7 @@ fun tinderSwipeScreen() {
         Column() {
             PoliticalAppIconTop()
             HeroCard(
-                fullName = "Kermit Cohen",
+                fullName = "Yakov Cohen",
                 worksAt = "McDonalds",
                 painter = painterResource(id = R.drawable.kermit2)
             )
@@ -71,7 +71,7 @@ fun LeftRightButtonsRow() {
                 modifier = Modifier.size(150.dp)
             )
             Text(text = "Lefty"
-                , style = TextStyle(color = Color(0xFF03588c), fontSize = 30.sp, fontWeight = FontWeight.Bold),
+                , style = TextStyle(color = Color(0xFF03588c), fontSize = 24.sp, fontWeight = FontWeight.Bold),
                 // move the text a little bit to the right
                 modifier = Modifier.padding(start = 30.dp)
             )
@@ -85,7 +85,7 @@ fun LeftRightButtonsRow() {
             )
                 Text(
                     text = "Righty",
-                    style = TextStyle(color = Color(0xFFa60321), fontSize = 30.sp, fontWeight = FontWeight.Bold),
+                    style = TextStyle(color = Color(0xFFa60321), fontSize = 24.sp, fontWeight = FontWeight.Bold),
                     modifier = Modifier.offset(x = -(25).dp)
                 )
         }
